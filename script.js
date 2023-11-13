@@ -42,8 +42,11 @@
 //   text: "This is a todo item",
 //   completed: false,
 // }
-
+let counter = 1;
 // Initialise an empty array with the variable name todoItems
+let todoItems = [
+];
+console.log(todoItems);
 
 // Function to add a todo to the list
 // It should accept a string as a parameter (text of the todo item)
@@ -51,9 +54,17 @@
 // the function does not need to return anything
 function addToDoItem(text) {
   // Implement the logic to add a task here
-
-  console.log("NOT YET IMPLEMENTED"); // Remove this line when you start working on the function
+let todo = {
+  id: counter,
+  text: text,
+  completed: false,
 }
+counter = counter + 1;
+todoItems.push(todo);
+console.log(todoItems);
+}
+ /* console.log("NOT YET IMPLEMENTED"); // Remove this line when you start working on the function
+}*/
 
 // Function to remove a todo to the list
 // It should accept a number as a parameter (id of the todo item)
@@ -63,9 +74,26 @@ function addToDoItem(text) {
 function removeToDoItem(todoId) {
   // Implement the logic to add a task here
 
-  console.log("NOT YET IMPLEMENTED"); // Remove this line when you start working on the function
-}
+  todoId = parseInt(todoId);
 
+  if (isNaN(todoId)) {
+    console.error('Error: Todo ID must be a number');
+    return;
+  }
+
+
+  for (let i = 0; i < todoItems.length; i++) {
+    if (todoItems[i].id === todoId) {
+      todoItems.splice(i, 1);
+      console.log(todoItems);
+      return;
+    }
+  }
+
+  console.error('Error: Todo not found');
+
+}
+  
 // Function to mark a task as completed
 // It should accept a number as a parameter (id of the todo item)
 // Loop through the array of todos, and when you find the todo item with the id
@@ -74,8 +102,23 @@ function removeToDoItem(todoId) {
 function markToDoItemAsCompleted(todoId) {
   // Implement the logic to mark a task as completed here
 
-  console.log("NOT YET IMPLEMENTED"); // Remove this line when you start working on the function
+  todoId = parseInt(todoId);
+
+  if (isNaN(todoId)) {
+    console.error('Error: Todo ID must be a number');
+    return;
+  }
+
+  for (let i = 0; i < todoItems.length; i++) {
+    if (todoItems[i].id === todoId) {
+      todoItems[i].completed = true;
+      console.log(todoItems);
+      return;
+    }
+  }
+  console.error('Error: Todo not found');
 }
+
 
 // Function to delete a task from the array
 // It should accept a number as a parameter (id of the todo item)
@@ -86,17 +129,35 @@ function markToDoItemAsCompleted(todoId) {
 function deleteToDoItem(todoId) {
   // Implement the logic to remove a task here
 
-  console.log("NOT YET IMPLEMENTED"); // Remove this line when you start working on the function
-}
+  todoId = parseInt(todoId);
 
+  if (isNaN(todoId)) {
+    console.error('Error: Todo ID must be a number');
+    return;
+  }
+
+  for (let i = 0; i < todoItems.length; i++) {
+    if (todoItems[i].id === todoId) {
+      todoItems.splice(i, 1);
+      console.log(todoItems);
+      return;
+    }
+  }
+  console.error('Error: Todo not found');
+}
 // Function to clear all completed tasks
 // Loop through the array of todos, and when you find a todo item that is marked
 // as completed, remove it completely from the array
 function clearCompletedTasks() {
   // Implement the logic to clear completed tasks here
-
-  console.log("NOT YET IMPLEMENTED"); // Remove this line when you start working on the function
+  for (let i = todoItems.length - 1; i >= 0; i--) {
+   if(todoItems[i].completed === true) {
+     todoItems.splice(i, 1);
+   }
+ }
+  console.log(todoItems);
 }
+
 
 // You can write your own tests here if you would like to test
 // your code before using the automated tests
@@ -105,3 +166,6 @@ function clearCompletedTasks() {
 //  console.log(todoItems); // This should show the todo item you added
 //  removeToDoItem(0); // This should remove the todo item with ID 0 from the array
 //  markToDoItemAsCompleted(0); // This should mark the todo item with ID 0 as completed
+
+/*citations: https://chat.openai.com/c/76fdcf4c-4d22-470a-bda0-c2f8dff162c6
+Git Copilot*/
